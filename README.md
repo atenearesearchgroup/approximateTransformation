@@ -10,8 +10,7 @@ Consider a simplified version of Amazon ordering service to identify some situat
 
 * Q1. CreateAdCampaign: if a product has been ordered more than 1000 times during an advertising campaign period and a relationship *isPublicized* between the product and the campaign does not exist, then the query creates it.
 
-The results of the experiments run with this query are shown [here](docs/query1.md).
-
+Gremlin query for Random approximation can be viewed following:
 
 ```
 graph.traversal().V().hasLabel("AdCampaign").as("campaign").values("initDate").as("initial")
@@ -23,22 +22,23 @@ graph.traversal().V().hasLabel("AdCampaign").as("campaign").values("initDate").a
 .where(__.select(values).is(P.gte(1000))).select(keys).addE("isPublicized").from("product")
 .to("campaign").iterate();
 ```
+The results of the experiments run with this query are shown [here](docs/query1.md).
 
 * Q2. UnpopularStock: it returns all products that have been ordered by less than 3 customers last month. 
 
-The results of the experiments run with this query are shown [here](docs/query2.md).
+
+Gremlin query for Random approximation can be viewed following:
 
 ```
 graph.traversal().V().hasLabel("Product").as("product").group()
 .by(__.in("contains").coin(prob).in("orders").as("customer").dedup("product", "customer").count())
 .unfold().where(__.select(keys).is(P.lte(3))).select(values).unfold().toList();
 ```
+The results of the experiments run with this query are shown [here](docs/query2.md).
 
 * Q3. RelatedProducts: for all products that have been ordered last month, it checks whether there is another product that was included in the same order at least 100 times. The query creates a link *isRelatedTo* between both products if it does not exist.
 
-The results of the experiments run with this query are shown [here](docs/query3.md).
-
-Random:
+Gremlin query for Random approximation can be viewed following:
 
 ```
 graph.traversal().V().hasLabel("Product").as("product1").in("contains")
@@ -49,7 +49,7 @@ graph.traversal().V().hasLabel("Product").as("product1").in("contains")
 .select(keys).addE("isRelatedTo").from("product1").to("product2").iterate();
 ```
 
-Temporal:
+Gremlin query for Temporal approximation can be viewed following:
 
 ```
 graph.traversal().V().hasLabel("Product").as("product1").in("contains")
@@ -60,9 +60,11 @@ graph.traversal().V().hasLabel("Product").as("product1").in("contains")
 .select(keys).addE("isRelatedTo").from("product1").to("product2").iterate();
 ```
 
+The results of the experiments run with this query are shown [here](docs/query3.md).
+
 * Q4. OlympicGamesTrending: considering we have a Rio de Janeiro Oympic Games AdCampaign, the query obtains the products that were ordered at least 100 times in Rio de Janeiro since the beginning of August 2016 until the end of the celebration of the Olympic Games. In this case, the query adds a relationship *isPublicized* between the products and the Olympic Games campaign. 
 
-Random:
+Gremlin query for Random approximation can be viewed following:
 
 ```
 graph.traversal().V().hasLabel("AdCampaign").has("name", P.eq("Olympic Games")).as("campaign").values("endDate").as("end")
@@ -75,7 +77,7 @@ graph.traversal().V().hasLabel("AdCampaign").has("name", P.eq("Olympic Games")).
 .select(keys).addE("isPublicized").from("product").to("campaign").iterate();
 ```
 
-Spatial:
+Gremlin query for Spatial approximation can be viewed following:
 
 ```
 graph.traversal().V().hasLabel("AdCampaign").has("name", P.eq("Olympic Games")).as("campaign").values("endDate")
@@ -89,7 +91,7 @@ graph.traversal().V().hasLabel("AdCampaign").has("name", P.eq("Olympic Games")).
 
 * Q5. RecommendsPack: if a customer has ordered *Product1* at least 5 times in different orders in the last month and this product is related to *Product2* (*isRelated* connection), then an offer for *Product2* is created for the customer. Such an offer has a priority of 1-highest priority. If *Product1* is related to *Product3* indirectly-i.e., through an intermediate product: *Product1* is related to *ProductX*, which is related to *Product3*-, then an offer for *Product3* with priority 2 is created for the customer. In this case, we say that *Product1* is related with *Product3* in two hops. Similarly, if *Product1* is related to *ProductN* in n hops, the query would create an offer with priority n. In this query, we consider offers from priority 1 to 3.
 
-The results of the experiments run with this query are shown [here](docs/query5.md).
+Gremlin query for Random approximation can be viewed following:
 
 ```
 graph.traversal().V().hasLabel("Product").as("product1")
@@ -100,6 +102,8 @@ graph.traversal().V().hasLabel("Product").as("product1")
 .select(keys).select("customer1", "product1").addE("offer").from("product1").to("customer1")
 .property("date", System.currentTimeMillis()).property("priority", hops).iterate();
 ```
+
+The results of the experiments run with this query are shown [here](docs/query5.md).
 
 # References
 
