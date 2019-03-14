@@ -36,6 +36,8 @@ graph.traversal().V().hasLabel("Product").as("product").group()
 
 * Q3. RelatedProducts: for all products that have been ordered last month, it checks whether there is another product that was included in the same order at least 100 times. The query creates a link *isRelatedTo* between both products if it does not exist.
 
+The results of the experiments run with this query are shown [here](docs/query3.md).
+
 Random:
 
 ```
