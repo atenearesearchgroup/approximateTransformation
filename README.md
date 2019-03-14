@@ -25,6 +25,9 @@ graph.traversal().V().hasLabel("AdCampaign").as("campaign").values("initDate").a
 ```
 
 * Q2. UnpopularStock: it returns all products that have been ordered by less than 3 customers last month. 
+
+The results of the experiments run with this query are shown [here](docs/query2.md).
+
 ```
 graph.traversal().V().hasLabel("Product").as("product").group()
 .by(__.in("contains").coin(prob).in("orders").as("customer").dedup("product", "customer").count())
