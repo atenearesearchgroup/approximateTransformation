@@ -89,6 +89,8 @@ graph.traversal().V().hasLabel("AdCampaign").has("name", P.eq("Olympic Games")).
 
 * Q5. RecommendsPack: if a customer has ordered *Product1* at least 5 times in different orders in the last month and this product is related to *Product2* (*isRelated* connection), then an offer for *Product2* is created for the customer. Such an offer has a priority of 1-highest priority. If *Product1* is related to *Product3* indirectly-i.e., through an intermediate product: *Product1* is related to *ProductX*, which is related to *Product3*-, then an offer for *Product3* with priority 2 is created for the customer. In this case, we say that *Product1* is related with *Product3* in two hops. Similarly, if *Product1* is related to *ProductN* in n hops, the query would create an offer with priority n. In this query, we consider offers from priority 1 to 3.
 
+The results of the experiments run with this query are shown [here](docs/query5.md).
+
 ```
 graph.traversal().V().hasLabel("Product").as("product1")
 .repeat(__.in("isRelatedTo").where(P.neq("product1")).as("x").loops().as("priority").select("x"))
