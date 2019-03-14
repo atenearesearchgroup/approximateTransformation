@@ -10,7 +10,7 @@ Consider a simplified version of Amazon ordering service to identify some situat
 
 * Q1. CreateAdCampaign: if a product has been ordered more than 1000 times during an advertising campaign period and a relationship *isPublicized* between the product and the campaign does not exist, then the query creates it.
 
-Results of the experiments [here](query1.md)
+Results of the experiments [here](docs/query1.md)
 
 
 ```
