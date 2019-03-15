@@ -1,4 +1,4 @@
-# Overview
+# Trading Accuracy for Performance
 
 The increase in the amount of information produced by existing data sources requires the efficient processing of data flows in real time. Due to the large volume of data, applications that need to process this information to make informed decisions and to detect situations of interest usually impose strong requirements on resources.  
 
