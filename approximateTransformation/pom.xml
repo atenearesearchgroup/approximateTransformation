@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.approximation.amazon</groupId>
+	<artifactId>approximateTransformation</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>approximateTransformation</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<tinkergraph.version>3.3.0.1</tinkergraph.version>
+		<gremlin.version>3.3.4</gremlin.version>
+		<gremlin-java.version>2.6.0</gremlin-java.version>
+		<exec-plugin.version>1.4.0</exec-plugin.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/com.michaelpollmeier/tinkergraph-gremlin -->
+		<dependency>
+			<groupId>com.michaelpollmeier</groupId>
+			<artifactId>tinkergraph-gremlin</artifactId>
+			<version>${tinkergraph.version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.tinkerpop/gremlin-core -->
+		<dependency>
+			<groupId>org.apache.tinkerpop</groupId>
+			<artifactId>gremlin-core</artifactId>
+			<version>${gremlin.version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.tinkerpop/tinkergraph-gremlin -->
+		<dependency>
+			<groupId>org.apache.tinkerpop</groupId>
+			<artifactId>tinkergraph-gremlin</artifactId>
+			<version>${gremlin.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.tinkerpop/gremlin-driver -->
+		<dependency>
+			<groupId>org.apache.tinkerpop</groupId>
+			<artifactId>gremlin-driver</artifactId>
+			<version>${gremlin.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.tinkerpop.gremlin/gremlin-java -->
+		<dependency>
+			<groupId>com.tinkerpop.gremlin</groupId>
+			<artifactId>gremlin-java</artifactId>
+			<version>${gremlin-java.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.tinkerpop.blueprints</groupId>
+			<artifactId>blueprints-core</artifactId>
+			<version>${gremlin-java.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${exec-plugin.version}</version>
+				<configuration>
+					<mainClass>com.approximation.amazon.ApproximateTransformationApp</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
