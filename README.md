@@ -106,6 +106,8 @@ graph.traversal().V().hasLabel("Product").as("product1")
 
 The results of the experiments run with this query are shown [here](docs/query5.md).
 
+# Running the case study
+Models can be downloaded [here](https://drive.google.com/open?id=1rO2VVCQagcRIitwCWn9aQoNwR4E5T_t4).
 # References
 
 [1] Gala Barquero, Javier Troya, Antonio Vallecillo: Trading Accuracy for Performance in Data Processing Applications.
