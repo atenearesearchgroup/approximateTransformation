@@ -107,7 +107,40 @@ graph.traversal().V().hasLabel("Product").as("product1")
 The results of the experiments run with this query are shown [here](docs/query5.md).
 
 # Running the case study
-Models can be downloaded [here](https://drive.google.com/open?id=1rO2VVCQagcRIitwCWn9aQoNwR4E5T_t4).
+
+This section gives instructions about how to run the source code in this repository.
+
+## Requirements/Dependencies
+
+   * Eclipse IDE (tested with Eclipse version 2018-09 (4.9.0)).
+   * Java 8
+   
+## Configuration and execution
+
+In order to run the case study, the reader has to follow the following steps:
+
+1. Import Java projects into a workspace.
+
+2. Create a folder named 'models' in approximateTransformation/src/main/resources.
+
+3. Download the Source Model files from [here](https://drive.google.com/open?id=1rO2VVCQagcRIitwCWn9aQoNwR4E5T_t4) and copy them into the created folder.
+
+4. Open file 'config.properties' located in approximateTransformation/src/main/resources. This file contains the configuration to run the experiments. It is divided into six parts:
+
+    * Configuration parameters: change the property 'file' to indicate the Source Model to be loaded.
+  
+    * Q1 - CreateAdCampaign parameters: change 'q1' value to *true* for executing CreateAdCampaign query. Choose 'prob1' value among 0 to 1 to indicate the probability for the random approximation.
+  
+    * Q2 - UnpopularStock parameters: change 'q2' value to *true* for executing UnpopularStock query. Choose 'prob2' value among 0 to 1 to indicate the probability for the random approximation.
+   
+    * Q3 - RelatedProducts parameters: Change 'q3Random' value to *true* for executing RelatedProducts query with random approximation and choose 'prob3' value among 0 to 1 to indicate the probability. On the other hand, change 'q3Temporal' value to *true* and 'window3' value among 0 to 30 to indicate the temporal period for temporal approximation.
+  
+    * Q4 - OlympicGamesTrending parameters: Change 'q4Random' value to *true* for executing OlympicGamesTrending query with random approximation and choose 'prob4' value among 0 to 1 to indicate the probability. On the other hand, change 'q4Spatial' value to *true* and 'hops4' value among 100 to 900 to indicate the number of hops for spatial approximation.
+  
+    * Q5 - RecommendsPack parameters: change 'q5' value to *true* for executing RecommendsPack query. Choose 'hops5' value among 1 to 3 to indicate the probability for the spatial approximation.
+ 
+ 5. Once the configuration is selected, run the file ApproximateTransformationApp.java.
+ 
 # References
 
 [1] Gala Barquero, Javier Troya, Antonio Vallecillo: Trading Accuracy for Performance in Data Processing Applications.
