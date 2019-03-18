@@ -22,7 +22,7 @@ graph.traversal().V().hasLabel("AdCampaign").as("campaign").values("initDate").a
 .where(__.select(values).is(P.gte(1000))).select(keys).addE("isPublicized").from("product")
 .to("campaign").iterate();
 ```
-The results of the experiments run with this query are shown [here](docs/query1.md).
+The results of the experiments run with this query are shown [<em>in this page</em>](docs/query1.md).
 
 * Q2. UnpopularStock: it returns all products that have been ordered by less than 3 customers last month. 
 
@@ -34,7 +34,7 @@ graph.traversal().V().hasLabel("Product").as("product").group()
 .by(__.in("contains").coin(prob).in("orders").as("customer").dedup("product", "customer").count())
 .unfold().where(__.select(keys).is(P.lte(3))).select(values).unfold().toList();
 ```
-The results of the experiments run with this query are shown [here](docs/query2.md).
+The results of the experiments run with this query are shown [<em>in this page</em>](docs/query2.md).
 
 * Q3. RelatedProducts: for all products that have been ordered last month, it checks whether there is another product that was included in the same order at least 100 times. The query creates a link *isRelatedTo* between both products if it does not exist.
 
@@ -60,7 +60,7 @@ graph.traversal().V().hasLabel("Product").as("product1").in("contains")
 .select(keys).addE("isRelatedTo").from("product1").to("product2").iterate();
 ```
 
-The results of the experiments run with this query are shown [here](docs/query3.md).
+The results of the experiments run with this query are shown [<em>in this page</em>](docs/query3.md).
 
 * Q4. OlympicGamesTrending: considering we have a Rio de Janeiro Oympic Games AdCampaign, the query obtains the products that were ordered at least 100 times in Rio de Janeiro since the beginning of August 2016 until the end of the celebration of the Olympic Games. In this case, the query adds a relationship *isPublicized* between the products and the Olympic Games campaign. 
 
@@ -88,7 +88,7 @@ graph.traversal().V().hasLabel("AdCampaign").has("name", P.eq("Olympic Games")).
 .select("campaign", "product").groupCount().unfold().where(__.select(values).is(P.gte(100)))
 .select(keys).addE("isPublicized").from("product").to("campaign").dedup().iterate();
 ```
-The results of the experiments run with this query are shown [here](docs/query4.md).
+The results of the experiments run with this query are shown [<em>in this page</em>](docs/query4.md).
 
 * Q5. RecommendsPack: if a customer has ordered *Product1* at least 5 times in different orders in the last month and this product is related to *Product2* (*isRelated* connection), then an offer for *Product2* is created for the customer. Such an offer has a priority of 1-highest priority. If *Product1* is related to *Product3* indirectly-i.e., through an intermediate product: *Product1* is related to *ProductX*, which is related to *Product3*-, then an offer for *Product3* with priority 2 is created for the customer. In this case, we say that *Product1* is related with *Product3* in two hops. Similarly, if *Product1* is related to *ProductN* in n hops, the query would create an offer with priority n. In this query, we consider offers from priority 1 to 3.
 
@@ -104,7 +104,7 @@ graph.traversal().V().hasLabel("Product").as("product1")
 .property("date", System.currentTimeMillis()).property("priority", hops).iterate();
 ```
 
-The results of the experiments run with this query are shown [here](docs/query5.md).
+The results of the experiments run with this query are shown [<em>in this page</em>](docs/query5.md).
 
 # Running the case study
 
@@ -140,6 +140,16 @@ In order to run the case study, the reader has to follow the following steps:
     * Q5 - RecommendsPack parameters: change 'q5' value to *true* for executing RecommendsPack query. Choose 'hops5' value among 1 to 3 to indicate the probability for the spatial approximation.
  
  5. Once the configuration is selected, run the file ApproximateTransformationApp.java.
+ 
+ # Experiment Results
+
+The results from running all queries with the different source models and applying different approximation techniques are accessible in the following:
+
+- Results from [Q1](docs/query1.md)
+- Results from [Q2](docs/query2.md)
+- Results from [Q3](docs/query3.md)
+- Results from [Q4](docs/query4.md) 
+- Results from [Q5](docs/query5.md)
  
 # References
 
