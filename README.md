@@ -151,4 +151,4 @@ The results from running all queries with the different source models and applyi
  
 # References
 
-[1] Gala Barquero, Javier Troya, Antonio Vallecillo: Trading Accuracy for Performance in Data Processing Applications. Submitted to ECMFA 2019.
+[1] Gala Barquero, Javier Troya, Antonio Vallecillo: Trading Accuracy for Performance in Data Processing Applications. Submitted.
